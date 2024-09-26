@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import EyeClose from "../icons/EyeClose.jsx";
 import Eye from "../icons/Eye.jsx";
-import Reg from "../icons/Reg.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -67,7 +66,7 @@ function Register() {
   return (
     <div className="container">
       <div className="sub">
-        <Reg />
+        <img src="/undraw_mobile_payments_re_7udl.svg" alt="" />
         <form onSubmit={handleSubmit}>
           <h2 className="title">Registrarse</h2>
           <input

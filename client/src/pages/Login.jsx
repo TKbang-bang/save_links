@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import EyeClose from "../icons/EyeClose.jsx";
 import Eye from "../icons/Eye.jsx";
-import LoginSVG from "../icons/LoginSVG.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -36,7 +35,7 @@ function Register() {
     }
   };
 
-  axios.defaults.withCredentials = true;
+  // axios.defaults.withCredentials = true;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,7 +66,7 @@ function Register() {
   return (
     <div className="container">
       <div className="sub">
-        <LoginSVG />
+        <img src="/undraw_sign_in_re_o58h.svg" alt="" />
         <form onSubmit={handleSubmit}>
           <h2 className="title">Inicia sesion</h2>
           <input

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Welcoming from "../icons/welcoming";
 import { useNavigate, Link } from "react-router-dom";
+import Out from "../icons/Out.jsx";
 
 function Home() {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
 
-  axios.defaults.withCredentials = true;
+  // axios.defaults.withCredentials = true;
 
   useEffect(() => {
     const getData = async () => {
@@ -25,23 +25,33 @@ function Home() {
     getData();
   }, []);
 
+  const Image = (data) => {
+    if (data.data.image == null) {
+      return (
+        <div className="img-cont">
+          {console.log(data.data)}
+          <img src="/user-solid.svg" alt="" />
+          <Link to={"/photo"}>Agregar foto</Link>
+        </div>
+      );
+    } else {
+      return (
+        <div className="img-cont">
+          <img src={"http://localhost:3000/" + data.data.image} alt="" />
+          <Link to={"/photo"}>Cambiar foto</Link>
+        </div>
+      );
+    }
+  };
+
   return (
     <div className="container">
       <div className="sub">
-        <Welcoming />
+        <img src="/undraw_welcoming_re_x0qo.svg" alt="" />
         <div className="info">
           <h2>Perfil</h2>
           <div className="user">
-            {user.image ? (
-              <div className="img-cont">
-                <img src="http://localhost:3000" alt="" />
-              </div>
-            ) : (
-              <div className="img-cont">
-                <img src="../../public/user-solid.svg" alt="" />
-                <Link to={"/photo"}>Agregar foto</Link>
-              </div>
-            )}
+            <Image data={user} />
             <h2>{user.name}</h2>
             <p>
               Es un gusto que estar de nuestro lado usuario{" "}
@@ -50,7 +60,11 @@ function Home() {
               formato de los perfiles.
             </p>
           </div>
-          <button>Cerrar sesion</button>
+
+          <button onClick={() => navigate("/login")} className="c">
+            <Out />
+            Cerrar sesion
+          </button>
         </div>
       </div>
     </div>

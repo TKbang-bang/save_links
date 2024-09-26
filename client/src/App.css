@@ -138,6 +138,25 @@
     margin-top: 1rem;
 }
 
+.container .sub .info button{
+    border: none;
+    background: none;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .3rem .5rem;
+    cursor: pointer;
+}
+
+.container .sub .info .c{
+    background-color: #c01d1d;
+}
+
+.container .sub .info .c svg{
+    width: 1rem;
+}
+
 .container .sub .elejir{
     display: flex;
     justify-content: center;
@@ -179,11 +198,3 @@
     font-size: .8rem;
 }
 
-
-
-
-
-svg{
-    width: 20px;
-    height: 20px;
-}

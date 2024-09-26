@@ -3,6 +3,7 @@ const router = require("./router/router");
 const cors = require("cors");
 const session = require("express-session");
 const sessionStore = require("./configs/session.js");
+const path = require("path");
 
 const app = express();
 app.set("port", process.env.PORT || 3000);
@@ -24,6 +25,8 @@ app.use(
     saveUninitialized: false,
   })
 );
+
+app.use(express.static(path.join(__dirname, "../images")));
 
 app.use(router);
 

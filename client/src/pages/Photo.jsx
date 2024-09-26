@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import UploadIcon from "../icons/UploadIcon.jsx";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Photo() {
   const [file, setFile] = useState(null);
   const [no, setNo] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     if (e.target.files[0]) {
@@ -17,13 +19,16 @@ function Photo() {
     }
   };
 
-  const handleSend = () => {
+  // axios.defaults.withCredentials = true;
+
+  const handleSend = async () => {
     setNo("");
     if (file) {
       const formData = new FormData();
       formData.append("img", file);
       try {
-        axios.post("http://localhost:3000/photo", formData);
+        await axios.post("http://localhost:3000/photo", formData);
+        navigate("/");
       } catch (error) {
         console.log(error);
       }

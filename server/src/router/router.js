@@ -66,7 +66,15 @@ router.get("/", (req, res) => {
 });
 
 router.post("/photo", upload.single("img"), (req, res) => {
-  console.log(req.file);
+  const rq = "SELECT image FROM users WHERE id = ?";
+  db.query(rq, [req.session.user.id], (err, data) => {
+    if (err) return res.json({ err });
+    const rq2 = "UPDATE users SET image = ? WHERE id = ?";
+    db.query(rq2, [req.file.filename, req.session.user.id], (err2, data2) => {
+      if (err2) return res.json({ err2 });
+      res.json({ ok: true });
+    });
+  });
 });
 
 module.exports = router;

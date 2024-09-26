@@ -4,8 +4,11 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Photo from "./pages/Photo";
+import axios from "axios";
 
 function App() {
+  axios.defaults.withCredentials = true;
+
   return (
     <BrowserRouter>
       <Routes>

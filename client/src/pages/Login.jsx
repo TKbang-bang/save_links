@@ -36,7 +36,7 @@ function Register() {
     }
   };
 
-  // axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = true;
 
   const handleSubmit = async (e) => {
     e.preventDefault();

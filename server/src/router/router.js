@@ -1,5 +1,6 @@
 const express = require("express");
 const db = require("../configs/db.js");
+const upload = require("../configs/multer.js");
 
 const router = express.Router();
 
@@ -31,16 +32,20 @@ router.post("/register", (req, res) => {
 
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
+
   const rq = "SELECT * FROM users WHERE email = ?";
   db.query(rq, [email], (err, data) => {
     if (err) return res.json({ err });
+
     if (data.length > 0) {
       const user = data[0];
+
       const rq2 = "SELECT * FROM passwords WHERE password = ?";
       db.query(rq2, [password], (err2, data2) => {
         if (err2) return res.json({ err2 });
+
         if (data2.length > 0) {
-          req.session.user = data;
+          req.session.user = user;
           res.json({ ok: true });
         } else {
           res.json({ ok: false, message: "!Contraseña equivocada*" });
@@ -53,7 +58,15 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/", (req, res) => {
-  res.send(req.session.user);
+  if (req.session.user) {
+    res.json({ log: true, user: req.session.user });
+  } else {
+    res.json({ log: false });
+  }
+});
+
+router.post("/photo", upload.single("img"), (req, res) => {
+  console.log(req.file);
 });
 
 module.exports = router;

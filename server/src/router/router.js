@@ -57,23 +57,68 @@ router.post("/login", (req, res) => {
   });
 });
 
-router.get("/", (req, res) => {
+router.get("/log", (req, res) => {
   if (req.session.user) {
-    res.json({ log: true, user: req.session.user });
+    res.json({ log: true });
   } else {
     res.json({ log: false });
   }
 });
 
-router.post("/photo", upload.single("img"), (req, res) => {
-  const rq = "SELECT image FROM users WHERE id = ?";
-  db.query(rq, [req.session.user.id], (err, data) => {
-    if (err) return res.json({ err });
-    const rq2 = "UPDATE users SET image = ? WHERE id = ?";
-    db.query(rq2, [req.file.filename, req.session.user.id], (err2, data2) => {
-      if (err2) return res.json({ err2 });
-      res.json({ ok: true });
+router.get("/", (req, res) => {
+  if (req.session.user) {
+    const rq = "SELECT * FROM links WHERE user_id = ?";
+    db.query(rq, [req.session.user.id], (err, data) => {
+      if (err) return res.json({ err });
+      res.json({ log: true, user: req.session.user, links: data });
     });
+  } else {
+    res.json({ log: false });
+  }
+});
+
+router.post("/add", (req, res) => {
+  const { title, url, description } = req.body;
+  const rq = "INSERT INTO links (user_id, title, link, description) VALUES (?)";
+  db.query(
+    rq,
+    [[req.session.user.id, title, url, description]],
+    (err, data) => {
+      if (err) return res.json({ err });
+      res.sendStatus(204);
+    }
+  );
+});
+
+router.post("/del", (req, res) => {
+  const { id } = req.body;
+  const rq = "DELETE FROM links WHERE id = ?";
+  db.query(rq, [id], (err, data) => {
+    if (err) return res.json({ err });
+    res.sendStatus(204);
+  });
+});
+
+router.post("/getid", (req, res) => {
+  const { id } = req.body;
+  if (req.session.user) {
+    const rq = "SELECT * FROM links WHERE id = ?";
+    db.query(rq, [id], (err, data) => {
+      if (err) return res.json(err);
+      res.json({ log: true, data });
+    });
+  } else {
+    res.json({ log: false });
+  }
+});
+
+router.put("/edit", (req, res) => {
+  const { id, title, url, description } = req.body;
+  const rq =
+    "UPDATE links SET title = ?, link = ?, description = ? WHERE id = ?";
+  db.query(rq, [title, url, description, id], (err, data) => {
+    if (err) return res.json({ err });
+    res.sendStatus(204);
   });
 });
 

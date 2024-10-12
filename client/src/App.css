@@ -198,3 +198,85 @@
     font-size: .8rem;
 }
 
+.container .sub-c{
+    background-color: var(--color2);
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.container .sub-c nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 50rem;
+    background-color: var(--color1);
+    border-radius: .2rem;
+    padding: 1rem;
+}
+
+.container .sub-c .card-cont{
+    background-color: var(--color3);
+    width: 100%;
+    border-radius: .2rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container .sub-c .card-cont .card{
+    width: 100%;
+    background-color: var(--color2);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container .sub-c .card-cont .card .uno{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: .3rem;
+}
+
+.container .sub-c .card-cont .card .uno a{
+    text-decoration: none;
+    display: block;
+    padding: .5rem 1rem;
+    background-color: var(--color3);
+    color: #fff;
+    border-radius: .2rem;
+}
+
+
+.container .sub-c .card-cont .card .dos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.container .sub-c .card-cont .card .dos button{
+    width: 7rem;
+    height: 2rem;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.container .sub-c .card-cont .card .dos .e{
+    background-color: #1ac41a;
+}
+
+.container .sub-c .card-cont .card .dos .d{
+    background-color: #c01d1d;
+}

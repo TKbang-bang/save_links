@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import EyeClose from "../icons/EyeClose.jsx";
 import Eye from "../icons/Eye.jsx";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,6 +14,20 @@ function Register() {
   const navigate = useNavigate();
 
   const [no, setNo] = useState("");
+
+  useEffect(() => {
+    const getLog = async () => {
+      try {
+        const rq = await axios.get("http://localhost:3000/log");
+        if (rq.data.log) {
+          navigate("/");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getLog();
+  }, []);
 
   const handleCLick = (e) => {
     e.preventDefault();

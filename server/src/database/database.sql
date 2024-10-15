@@ -13,3 +13,11 @@ CREATE TABLE IF NOT EXISTS passwords(
     user_id INT,
     password VARCHAR(70)
 );
+
+CREATE TABLE IF NOT EXISTS links(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    link VARCHAR(70),
+    title VARCHAR(100),
+    description TEXT
+);

@@ -17,7 +17,7 @@ function Home() {
           const { user, links } = rq.data;
           setLinks(links);
           setUser(user);
-          // console.log(links);
+          console.log(user);
         } else {
           navigate("/login");
         }
@@ -28,13 +28,34 @@ function Home() {
     getData();
   }, []);
 
+  const handleLogOut = () => {
+    try {
+      axios.get("http://localhost:3000/logout");
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDel = () => {
+    try {
+      axios.delete("http://localhost:3000/del/" + user.id);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="container">
       <div className="sub-c">
         <nav>
           <h2>Links</h2>
           <Link to={"/add"}>+ Agregar link</Link>
-          <Link to={"/login"}>Cerrar sesion</Link>
+          <div className="btns">
+            <button onClick={handleLogOut}>Cerrar sesion</button>
+            <button onClick={handleDel}>Borrar cuenta</button>
+          </div>
         </nav>
         <div className="card-cont">
           {links.map((lk) => (

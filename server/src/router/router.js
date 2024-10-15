@@ -122,4 +122,19 @@ router.put("/edit", (req, res) => {
   });
 });
 
+router.get("/logout", (req, res) => {
+  req.session.destroy();
+  res.sendStatus(204);
+});
+
+router.delete("/del/:id", (req, res) => {
+  const id = req.params.id;
+  const rq = "DELETE FROM users WHERE id = ?";
+  db.query(rq, [id], (err, data) => {
+    if (err) return res.json({ err });
+    req.session.destroy();
+    res.sendStatus(204);
+  });
+});
+
 module.exports = router;
